@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+<!-- tailwind and DaisyUI -->
+  
+  <link href="https://cdn.jsdelivr.net/npm/daisyui@5" rel="stylesheet" type="text/css" />
+  <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+
+</head>
+<body class="bg-[#DCFCE7] ">
+  <h2 class="text-center p-10">Choose Your Tree</h2>
+  <section class="main grid grid-cols-12  gap-3">
+    <!-- categories -->
+       <div class="category col-span-3" >
+      <h2 class="font-bold text-center mb-2">Categories</h2>
+      <button id="allTree" onclick="loadPlants()" class="btn  btn-accent mb-2 w-full">All Trees</button>
+
+        <div id="categories"> </div>
+       </div>
+   
+    <!-- trees -->
+    <div class="tree col-span-6" >
+      <div class="cards grid grid-cols-3 gap-2 overflow-hidden" id="trees">
+       
+      </div>
+        
+      <div id="spinner" class="spinner flex justify-center items-center hidden">
+        <span class="loading loading-dots loading-xl"></span>
+      </div>
+    </div>
+    <!-- add to card -->
+    <div class="addToCard col-span-3" id="addToCard">
+tyhrththt
+    </div>
+
+   <!-- Modal  -->
+<!-- Open the modal using ID.showModal() method -->
+<!-- <button class="btn" onclick="my_modal.showModal()">open modal</button> -->
+<dialog id="my_modal" class="modal modal-bottom sm:modal-middle">
+  <div id="modal-box" class="modal-box">
+    <div id="detail" class="describtion">
+
+    </div>
+    <div class="modal-action">
+      <form method="dialog">
+        <!-- if there is a button in form, it will close the modal -->
+        <button class="btn btn-outline btn-success">Close</button>
+      </form>
+    </div>
+  </div>
+</dialog>
+
+  </section>
+
+
+
+  
+
+  <script src="./script.js"></script>
+</body>
+</html>
