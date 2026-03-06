@@ -89,7 +89,7 @@ const showPlants = data => {
             </div>
           </div>
           <div class="addToCard">
-            <button class="btn  btn-accent w-auto ">Add To Card</button>
+            <button onclick="addToCard(${plant.id},'${plant.name}',${plant.price})"  class="btn  btn-accent w-auto ">Add To Card</button>
           </div>
         </div>
       </div>
@@ -98,6 +98,73 @@ const showPlants = data => {
     allTree.appendChild(div);
   });
 };
+
+
+
+
+const cardContainer = document.getElementById('cardContainer');
+let card = [];
+const addToCard = ((id,name,price) => {
+  // console.log(id, price, name);
+  const existingItem = card.find((item) => item.id === id)
+  if (existingItem) {
+    existingItem.quantity += 1;
+  }
+  else {
+    card.push({
+      id,
+      name,
+      price,
+      quantity: 1,
+    });
+  }
+    
+  updateCard(card)
+})
+
+const initialMessage = document.getElementById('initialMessage');
+
+
+let totalPrice = document.getElementById('total')
+const updateCard = (card) => {
+  cardContainer.innerHTML = '';
+  if (card.length === 0) {
+    initialMessage.classList.remove('hidden')
+    totalPrice.innerHTML = `$01`; // Reset total display
+    return
+  } 
+    initialMessage.classList.add('hidden');
+  
+  let total = 0;
+  
+  console.log(card);
+  card.forEach((item) => {
+    total += item.price * item.quantity; 
+    const cardItem = document.createElement('div')
+    cardItem.innerHTML = `
+    <div class="flex justify-between p-3 rounded-xl mb-2 bg-white shadow-sm border border-gray-100">
+        <div>
+          <h2 class="font-bold">${item.name}</h2>
+          <p class="text-sm text-gray-500">$${item.price} x ${item.quantity}</p>
+          <p class="font-semibold text-green-600">$${(item.price * item.quantity).toFixed(2)}</p>
+        </div>
+        <button onclick="removeFromCard(${item.id})" class="text-red-400 hover:text-red-600 font-bold px-2"   >X
+        </button>
+      </div>
+    `;
+    cardContainer.appendChild(cardItem)
+  })
+  totalPrice.innerHTML = `$${total}`;
+}
+
+const removeFromCard = (id) => {
+  
+  // console.log(id);
+  card = card.filter((item) => item.id != id)
+  updateCard(card);
+}
+
+
 
 const spinner = document.getElementById('spinner');
 const trees = document.getElementById('trees');
